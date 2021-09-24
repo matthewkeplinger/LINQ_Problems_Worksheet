@@ -338,7 +338,7 @@ namespace DatabaseFirstLINQ
                         userSum += p.Product.Price * Convert.ToDecimal(p.Quantity);
                     }
                 }
-                Console.WriteLine($"{user.Id} has a cart total price of: {cartSum}");
+                Console.WriteLine($"User {user.Id} has a cart total price of: {userSum}");
                 cartSum += userSum;
             }
             Console.WriteLine($"Total Sum of all open carts: {cartSum}");
