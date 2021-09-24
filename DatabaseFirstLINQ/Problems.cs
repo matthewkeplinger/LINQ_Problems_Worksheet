@@ -35,7 +35,8 @@ namespace DatabaseFirstLINQ
             //ProblemEighteen();
             //ProblemNineteen();
             //ProblemTwenty();
-            Console.WriteLine(BonusOne());
+            //Console.WriteLine(BonusOne());
+            BonusTwo();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -43,7 +44,7 @@ namespace DatabaseFirstLINQ
         private void ProblemOne()
         {
             var users = _context.Users.ToList().Count();
-            Console.WriteLine("Number of Users: {0}", users);
+            Console.WriteLine($"Number of Users: {users}");
             // Write a LINQ query that returns the number of users in the Users table.
             // HINT: .ToList().Count()
 
@@ -83,7 +84,7 @@ namespace DatabaseFirstLINQ
 
             foreach (var product in productWithS)
             {
-                Console.WriteLine("Product with S in the name: {0}", product.Name);
+                Console.WriteLine($"Product with S in the name: {product.Name}");
             }
 
         }
@@ -97,7 +98,7 @@ namespace DatabaseFirstLINQ
             var registeredBefore2016 = users.Where(user => user.RegistrationDate < date);
             foreach (var user in registeredBefore2016)
             {
-                Console.WriteLine("Users registered before 2016: {0} date: {1}", user.Email, user.RegistrationDate);
+                Console.WriteLine($"Users registered before 2016: {user.Email} date: {user.RegistrationDate}" );
             }
 
         }
@@ -112,7 +113,7 @@ namespace DatabaseFirstLINQ
             var registeredDuringRange = users.Where(user => user.RegistrationDate < beforeDate && user.RegistrationDate > afterDate);
             foreach (var user in registeredDuringRange)
             {
-                Console.WriteLine("Users registered between 2016 and 2018: {0} date: {1}", user.Email, user.RegistrationDate);
+                Console.WriteLine($"Users registered between 2016 and 2018: {user.Email} date: {user.RegistrationDate}");
             }
         }
 
@@ -146,7 +147,7 @@ namespace DatabaseFirstLINQ
             // HINT: End of query will be: .Select(sc => sc.Product.Price).Sum();
             // Then print the total of the shopping cart to the console.
             var customerCartTotal = _context.ShoppingCarts.Include(ur => ur.User).Include(ur => ur.Product).Where(ur => ur.User.Email == "oda@gmail.com").Select(sc => sc.Product.Price).Sum();
-            Console.WriteLine("Cart Total: {0}", customerCartTotal);
+            Console.WriteLine($"Cart Total: {customerCartTotal}");
 
         }
 
@@ -318,27 +319,46 @@ namespace DatabaseFirstLINQ
             }
 
 
-            //private void BonusTwo()
-            //{
-            //    // Write a query that finds the total of every users shopping cart products using LINQ.
-            //    // Display the total of each users shopping cart as well as the total of the toals to the console.
-            //}
+        private void BonusTwo()
+        {
+            // Write a query that finds the total of every users shopping cart products using LINQ.
+            // Display the total of each users shopping cart as well as the total of the toals to the console.
+            var users = _context.Users;
+            var cart = _context.ShoppingCarts.Include(p => p.Product).ToList();
 
-            //// BIG ONE
-            //private void BonusThree()
-            //{
-            //    // 1. Create functionality for a user to sign in via the console
-            //    // 2. If the user succesfully signs in
-            //    // a. Give them a menu where they perform the following actions within the console
-            //    // View the products in their shopping cart
-            //    // View all products in the Products table
-            //    // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
-            //    // Remove a product from their shopping cart
-            //    // 3. If the user does not succesfully sing in
-            //    // a. Display "Invalid Email or Password"
-            //    // b. Re-prompt the user for credentials
+            decimal cartSum = 0;
 
-            //}
-
+            foreach (var user in users)
+            {
+                decimal userSum = 0;
+                foreach (var p in cart)
+                {
+                    if(user.Id == p.UserId)
+                    {
+                        userSum += p.Product.Price * Convert.ToDecimal(p.Quantity);
+                    }
+                }
+                Console.WriteLine($"{user.Id} has a cart total price of: {cartSum}");
+                cartSum += userSum;
+            }
+            Console.WriteLine($"Total Sum of all open carts: {cartSum}");
         }
+
+        //// BIG ONE
+        //private void BonusThree()
+        //{
+        //    // 1. Create functionality for a user to sign in via the console
+        //    // 2. If the user succesfully signs in
+        //    // a. Give them a menu where they perform the following actions within the console
+        //    // View the products in their shopping cart
+        //    // View all products in the Products table
+        //    // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
+        //    // Remove a product from their shopping cart
+        //    // 3. If the user does not succesfully sing in
+        //    // a. Display "Invalid Email or Password"
+        //    // b. Re-prompt the user for credentials
+
+        //}
+
+    }
     }
