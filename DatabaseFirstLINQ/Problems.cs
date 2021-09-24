@@ -209,7 +209,7 @@ namespace DatabaseFirstLINQ
         private void ProblemFourteen()
         {
             // Add the product you create to the user we created in the ShoppingCart junction table using LINQ.
-            var productId = _context.Products.Where(r => r.Name == "Flamethrower").Select(r => r.Id).SingleOrDefault();
+            var productId = _context.Products.Where(p => p.Name == "Flamethrower").Select(p => p.Id).SingleOrDefault();
             var userId = _context.Users.Where(u => u.Email == "david@gmail.com").Select(u => u.Id).SingleOrDefault();
             ShoppingCart newItem = new ShoppingCart()
             {
@@ -236,9 +236,8 @@ namespace DatabaseFirstLINQ
         {
             // Update the price of the product you created to something different using LINQ.
             // Update the email of the user we created to "mike@gmail.com"
-            var product = _context.Products.Where(u => u.Name == "Flamethrower").SingleOrDefault();
+            var product = _context.Products.Where(p => p.Name == "Flamethrower").SingleOrDefault();
             product.Price = 150;
-            product.Description = "It's safe I swear.";
             _context.Products.Update(product);
             _context.SaveChanges();
 
@@ -286,7 +285,7 @@ namespace DatabaseFirstLINQ
         private void ProblemTwenty()
         {
             // Delete the user with the email "oda@gmail.com" from the Users table using LINQ.
-            var user = _context.Users.Where(ur => ur.Email == "oda@gmail.com").SingleOrDefault();
+            var user = _context.Users.Where(u => u.Email == "oda@gmail.com").SingleOrDefault();
             _context.Users.Remove(user);
             _context.SaveChanges();
         }
