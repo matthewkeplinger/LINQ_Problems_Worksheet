@@ -293,53 +293,52 @@ namespace DatabaseFirstLINQ
 
         // <><><><><><><><> BONUS PROBLEMS <><><><><><><><><>
 
-        //private void BonusOne()
-        //{
-        //    // Prompt the user to enter in an email and password through the console.
-        //    // Take the email and password and check if the there is a person that matches that combination.
-        //    // Print "Signed In!" to the console if they exists and the values match otherwise print "Invalid Email or Password.".
+        private string BonusOne()
+        {
+            // Prompt the user to enter in an email and password through the console.
+            // Take the email and password and check if the there is a person that matches that combination.
+            // Print "Signed In!" to the console if they exists and the values match otherwise print "Invalid Email or Password.".
 
-        //    Console.WriteLine("Sign In Email: ");
-        //    string email = Console.ReadLine();
+            Console.WriteLine("Sign In Email: ");
+            string email = Console.ReadLine();
 
-        //    Console.WriteLine("Enter your Password: ");
-        //    string password = Console.ReadLine();
+            Console.WriteLine("Enter your Password: ");
+            string password = Console.ReadLine();
 
-        //    var users = _context.Users.ToList();
+            var users = _context.Users.ToList();
 
-        //    foreach (var user in users)
-        //    {
-        //        if (user.Email == email && user.Password == password)
-        //        {
-        //            return "User Authorized!";
-
-        //        }
-        //    return "Invalid User Information";
-        //    }
-
-
-            private void BonusTwo()
+            foreach (var user in users)
             {
-                // Write a query that finds the total of every users shopping cart products using LINQ.
-                // Display the total of each users shopping cart as well as the total of the toals to the console.
+                if (user.Email == email && user.Password == password)
+                {
+                    return "Authorized!";
+                }
+            }
+            return "Invalid User Information";
             }
 
-            // BIG ONE
-            private void BonusThree()
-            {
-                // 1. Create functionality for a user to sign in via the console
-                // 2. If the user succesfully signs in
-                // a. Give them a menu where they perform the following actions within the console
-                // View the products in their shopping cart
-                // View all products in the Products table
-                // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
-                // Remove a product from their shopping cart
-                // 3. If the user does not succesfully sing in
-                // a. Display "Invalid Email or Password"
-                // b. Re-prompt the user for credentials
 
-            }
+            //private void BonusTwo()
+            //{
+            //    // Write a query that finds the total of every users shopping cart products using LINQ.
+            //    // Display the total of each users shopping cart as well as the total of the toals to the console.
+            //}
+
+            //// BIG ONE
+            //private void BonusThree()
+            //{
+            //    // 1. Create functionality for a user to sign in via the console
+            //    // 2. If the user succesfully signs in
+            //    // a. Give them a menu where they perform the following actions within the console
+            //    // View the products in their shopping cart
+            //    // View all products in the Products table
+            //    // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
+            //    // Remove a product from their shopping cart
+            //    // 3. If the user does not succesfully sing in
+            //    // a. Display "Invalid Email or Password"
+            //    // b. Re-prompt the user for credentials
+
+            //}
 
         }
     }
-}
